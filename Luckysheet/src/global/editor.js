@@ -15,7 +15,7 @@ const editor = {
 
         if(_this.deepCopyFlowDataState){
             if(_this.deepCopyFlowDataWorker != null){
-                _this.deepCopyFlowDataWorker.terminate();  
+                _this.deepCopyFlowDataWorker.terminate();
             }
             return _this.deepCopyFlowDataCache;
         }
@@ -51,7 +51,7 @@ const editor = {
 
             _this.deepCopyFlowDataWorker = worker;
             worker.postMessage(flowData);
-            worker.onmessage = function(e) { 
+            worker.onmessage = function(e) {
                 _this.deepCopyFlowDataCache = e.data;
                 _this.deepCopyFlowDataState = true;
             };
@@ -62,9 +62,9 @@ const editor = {
     },
 
     /**
-     * @param {Array} dataChe 
+     * @param {Array} dataChe
      * @param {Object} range 是否指定选区，默认为当前选区
-     * @since Add range parameter. Update by siwei@2020-09-10. 
+     * @since Add range parameter. Update by siwei@2020-09-10.
      */
     controlHandler: function (dataChe, range) {
         let _this = this;
@@ -104,7 +104,7 @@ const editor = {
     clearRangeByindex: function (st_r, ed_r, st_c, ed_c, sheetIndex) {
         let index = getSheetIndex(sheetIndex);
         let d = $.extend(true, [], Store.luckysheetfile[index]["data"]);
-        
+
         for (let r = st_r; r <= ed_r; r++) {
             let x = [].concat(d[r]);
             for (let c = st_c; c <= ed_c; c++) {
@@ -116,9 +116,9 @@ const editor = {
         }
 
         if(sheetIndex == Store.currentSheetIndex){
-            let rlen = ed_r - st_r + 1, 
+            let rlen = ed_r - st_r + 1,
                 clen = ed_c - st_c + 1;
-            
+
             if (rlen > 5000) {
                 jfrefreshgrid(d, [{ "row": [st_r, ed_r], "column": [st_c, ed_c] }]);
             }

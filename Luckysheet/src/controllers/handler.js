@@ -6101,7 +6101,9 @@ export default function luckysheetHandler() {
                                     cell.v = null;
                                     cell.m = "";
                                 } else {
-                                    let mask = genarate($td.text());
+                                    // 如果文本中包含br，说明文本换行。手动插入换行符
+                                    const text = $td.html().includes("br") ? $td.html().replace(/<br\s*[^>]*>/g, '\n'): $td.text();
+                                    let mask = genarate(text);
                                     cell.v = mask[2];
                                     cell.ct = mask[1];
                                     cell.m = mask[0];

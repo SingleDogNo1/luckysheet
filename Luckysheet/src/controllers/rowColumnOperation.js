@@ -1975,7 +1975,9 @@ export function rowColumnOperationInitial() {
 
             //行高、列宽 刷新
             jfrefreshgrid_rhcw(Store.flowdata.length, Store.flowdata[0].length);
-            hiddenRows.length > 0 && showRow(hiddenRows[0], hiddenRows[hiddenRows.length - 1] + 1);
+            const startRow = parseInt(hiddenRows[0])
+            const endRow = parseInt(hiddenRows[hiddenRows.length - 1])
+            showRow(startRow, endRow + 1);
         } else if (Store.luckysheetRightHeadClickIs == "column") {
             if (!checkProtectionAuthorityNormal(Store.currentSheetIndex, "formatColumns")) {
                 return;
@@ -2017,7 +2019,9 @@ export function rowColumnOperationInitial() {
 
             //行高、列宽 刷新
             jfrefreshgrid_rhcw(Store.flowdata.length, Store.flowdata[0].length);
-            hiddenCols.length > 0 && showColumn(hiddenCols[0], hiddenCols[hiddenCols.length - 1] + 1);
+            const startCol = parseInt(hiddenCols[0])
+            const endCol = parseInt(hiddenCols[hiddenCols.length - 1])
+            showColumn(startCol, endCol + 1);
         }
     });
     //隐藏、显示行

@@ -9,6 +9,7 @@ import { getObjType, showrightclickmenu, luckysheetContainerFocus, luckysheetfon
 import { getSheetIndex, getRangetxt } from "../methods/get";
 import { rowLocation, rowLocationByIndex, colLocation, colLocationByIndex, mouseposition } from "../global/location";
 import { isRealNull, isRealNum, hasPartMC, isEditMode, checkIsAllowEdit } from "../global/validate";
+import { showRow, showColumn } from "../global/api";
 import { countfunc } from "../global/count";
 import formula from "../global/formula";
 import { luckysheetextendtable, luckysheetdeletetable, luckysheetDeleteCell } from "../global/extend";
@@ -1943,6 +1944,8 @@ export function rowColumnOperationInitial() {
                 return;
             }
 
+            const hiddenRows = Object.keys(cfg["rowhidden"]);
+
             for (let s = 0; s < Store.luckysheet_select_save.length; s++) {
                 let r1 = Store.luckysheet_select_save[s].row[0],
                     r2 = Store.luckysheet_select_save[s].row[1];
@@ -1972,6 +1975,7 @@ export function rowColumnOperationInitial() {
 
             //行高、列宽 刷新
             jfrefreshgrid_rhcw(Store.flowdata.length, Store.flowdata[0].length);
+            hiddenRows.length > 0 && showRow(hiddenRows[0], hiddenRows[hiddenRows.length - 1] + 1);
         } else if (Store.luckysheetRightHeadClickIs == "column") {
             if (!checkProtectionAuthorityNormal(Store.currentSheetIndex, "formatColumns")) {
                 return;
@@ -1981,6 +1985,8 @@ export function rowColumnOperationInitial() {
             if (cfg["colhidden"] == null) {
                 return;
             }
+
+            const hiddenCols = Object.keys(cfg["colhidden"]);
 
             for (let s = 0; s < Store.luckysheet_select_save.length; s++) {
                 let c1 = Store.luckysheet_select_save[s].column[0],
@@ -2011,6 +2017,7 @@ export function rowColumnOperationInitial() {
 
             //行高、列宽 刷新
             jfrefreshgrid_rhcw(Store.flowdata.length, Store.flowdata[0].length);
+            hiddenCols.length > 0 && showColumn(hiddenCols[0], hiddenCols[hiddenCols.length - 1] + 1);
         }
     });
     //隐藏、显示行
